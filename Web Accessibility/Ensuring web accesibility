@@ -1,0 +1,117 @@
+
+Ensuring that your webpage is accessible to all users and all clients is critical. As Tim Berners-Lee, the creator of the World Wide Web, once said: "The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect."
+
+As a burgeoning web developer, you believe that learning how to ensure that your pages are accessible early on is important. It's always easier to build a page to be accessible than it is to retrofit it later. If you learn these skills when you first start down the path, they'll become natural. You can then create accessible pages and spot potential pitfalls.
+
+In this module, you'll learn about:
+
+    x Tools that users use to browse through webpages.
+    x Tools that developers use to ensure accessibility.
+    x Skills for ensuring that your pages are accessible.
+
+You're probably very familiar with using a browser as a client to browse the web. When you think about designing webpages, you can picture the user experience with this client because you have personal experience with it. But not all users use a browser in the same way, or use a browser at all. To create experiences for all users, you should understand the various tools that people might use when they browse the web.
+
+# Screen readers #
+
+One of the best-known accessibility tools is a screen reader. Screen readers are commonly used clients for people with vision impairments. They're built into most operating systems. As we spend time ensuring that a browser properly conveys the information that we want to share, we must also ensure that a screen reader does the same.
+
+At its most basic, a screen reader reads a page from top to bottom audibly. If your page is all text, the reader conveys the information in a similar way to a browser. Of course, webpages are rarely purely text; they contain links, graphics, color, and other visual components. Care must be taken to ensure that a screen reader can correctly read this information.
+
+Some browsers also have built-in tools and extensions that can read text aloud or even provide some basic navigational features, such as these accessibility-focused Edge browser tools. These browser tools are also important accessibility tools, but they function differently from screen readers. They shouldn't be mistaken for screen-reader testing tools.
+
+# Zoom #
+
+Another tool that people with vision impairments commonly use is zooming. The most basic type of zooming is static zoom, which is controlled through the keyboard shortcut Ctrl+Plus sign (+) or by decreasing screen resolution. This type of zoom resizes the entire page. Using responsive design, where items shift based on the viewport, is important to provide a good user experience at increased zoom levels.
+
+Your operating system likely has built-in zoom capabilities that allow you to magnify parts of the screen, much like using a real magnifying glass. Magnifier is built into Windows, whereas ZoomText is available as a more fully featured and popular partner add-on. Both macOS and iOS have a built-in magnification tool called Zoom.
+
+
+## Ensuring accessibility with developer tools ##
+
+Testing your webpage in various clients and views is as important as testing it in various browsers. This testing might not be practical in all scenarios, and it can miss situations where users use a browser but might have another disability. Fortunately, there are tools that you can use as a developer to gauge the accessibility of your page.
+
+# Contrast checkers #
+
+Someone who is color-blind might not be able to differentiate between colors, or might have difficulty working with colors that are similar to one another. The World Wide Web Consortium (W3C), the standards organization for the web, established a rating system for color contrast.
+
+Choosing the right colors to ensure that your page is accessible to all can be tricky to do by hand. You can use the following tools to both generate appropriate colors and test your site to ensure compliance:
+
+Palette generation tools:
+    Adobe Color, an interactive tool for testing color combinations
+    Color Safe, a tool for generating text colors based on a selected background color
+Compliance checkers:
+    Browser extensions to test a page:
+    Edge: WCAG Color contrast checker
+    Firefox: WCAG Contrast checker
+    Chrome: Colour Contrast Checker
+Applications:
+    Colour Contrast Analyser (CCA)
+
+# Lighthouse #
+
+Lighthouse is a tool that Google created for analyzing websites. It has become so popular that it's included in many browsers' developer tools. Lighthouse can examine a page's search engine optimization (SEO), load performance, and other best practices. Lighthouse can also analyze a page and provide a score for its current accessibility.
+
+## Exercise: Generate a page's Lighthouse accessibility score ##
+
+Test out Lighthouse in your browser. The following screenshots use Edge, but you can follow the same steps in Chrome and many other browsers.
+
+    1. Open your browser and go to the main Microsoft webpage.
+
+    2. Select the F12 key to open the developer tools.
+
+    3. On the top, select the chevron (>>) icon to open the list of hidden tabs.
+
+## Ensuring links and images are accessible ##
+
+Two of the most common components on any webpage are links and images. These items have a profound impact on accessibility. Ensuring good link text and alt text is one of the first steps that you can take to improve your pages for all users.
+
+# Link text #
+
+Hyperlinks are core to browsing the web. Ensuring that a screen reader can properly read links allows all users to browse through your site.
+
+Consider the two links in the following example text:
+
+    "The little penguin, sometimes known as the fairy penguin, is the smallest penguin in the world. <<Click here>> for more information."
+    "The little penguin, sometimes known as the fairy penguin, is the smallest penguin in the world. Visit <<https://en.wikipedia.org/wiki/Little_penguin>> for more information."
+
+Although these links might seem fine for someone with full sight, they won't work as you might expect with a screen reader. Remember, screen readers read the text. If a URL appears in the text, the screen reader will read the URL. In general, the URL does not convey meaningful information and can sound annoying. You might have experienced this problem if your phone has ever audibly read a text message with a URL.
+
+Screen readers also have the ability to read only the hyperlinks on a page, much in the same way that a sighted person would scan a page for links. If the link text is always "click here", all the user will hear is "click here, click here, click here, click here, click here, ..." All links are now indistinguishable from one another, which is a frustrating experience.
+
+The word "click" is also a problem, because not all users will click. Phone users will tap, keyboard users might select the Enter key or the Spacebar, and other clients will use other means.
+
+We need to always use meaningful link text. Good link text briefly describes what's on the other side of the link. In the earlier example about little penguins, the link goes to the Wikipedia page about the species. The phrase little penguins would be perfect link text because it makes it clear what someone will learn about if they select the link:
+
+"<<The little penguin>> , sometimes known as the fairy penguin, is the smallest penguin in the world."
+
+ARIA attributes
+Imagine the following product page:
+
+Product	             Description	                Order
+Widget	            [Description]('#')	            [Order]('#')
+Super widget	    [Description]('#')	            [Order]('#')
+
+This is a common layout for a page that shows information about various items in a table, with links to the description and order. Duplicating the text of description and order make sense for someone who's using a browser. However, someone who's using a screen reader would only hear the words description and order repeated without context.
+
+To support these types of scenarios, HTML supports a set of attributes known as Accessible Rich Internet Applications (ARIA). You can use these attributes to provide more information to screen readers.
+
+For example, you can use aria-label to describe a link when the format of the page doesn't allow you to. The description for widget might be set as:
+
+<a href="#" aria-label="Widget description">description</a>
+
+ARIA has numerous uses beyond adding text for screen readers to read for links. You can use it to describe the roles that certain elements play when semantic HTML isn't available. When you're creating a tree, for example, you can use ARIA roles to describe the interface to a screen reader:
+
+<h2 id="tree-label">File Viewer</h2>
+<div role="tree" aria-labelledby="tree-label">
+  <div role="treeitem" aria-expanded="false" tabindex="0">Uploads</div>
+</div>
+
+**Important**
+
+Using semantic markup and good link text as described earlier generally supersedes the use of ARIA. Browsers and screen readers are not the only clients that a user might use, and designing your page to work well for all clients and users should be your main goal.
+
+## Alt text for images ## 
+
+As a general rule, screen readers can't read the contents of an image. Although some might use artificial intelligence, the generated results might not be contextually accurate. Fortunately, ensuring that images are accessible doesn't take much work - it's what the alt attribute is all about. All meaningful images should have an alt attribute (known casually as alt text) to describe what they are or the information that they're trying to convey.
+
+Images that are purely decorative should have their alt attribute set to an empty string: alt="". This setting prevents screen readers from unnecessarily announcing the decorative image.
