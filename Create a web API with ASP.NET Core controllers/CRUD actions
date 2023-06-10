@@ -1,0 +1,261 @@
+Our pizza service supports CRUD operations for a list of pizzas. These operations are performed through HTTP verbs, which are mapped via ASP.NET Core attributes. As you've seen, the HTTP GET verb is used to retrieve one or more items from a service. Such an action is annotated with the [HttpGet] attribute.
+
+The following table shows the mapping of the four operations that you're implementing for the pizza service:
+
+HTTP action verb	    CRUD operation	    ASP.NET Core attribute
+GET	                        Read	                [HttpGet]
+POST	                    Create	                [HttpPost]
+PUT	                        Update	                [HttpPut]
+DELETE	                    Delete	                [HttpDelete]
+
+You've already seen how GET actions work. Let's learn more about POST, PUT, and DELETE actions.
+
+POST
+
+To enable users to add a new item to the endpoint, you must implement the POST action by using the [HttpPost] attribute. When you pass the item (in this example, a pizza) into the method as a parameter, ASP.NET Core will automatically convert any application/JSON that's sent to the endpoint into a populated .NET Pizza object.
+
+Here's the method signature of the Create method that you'll implement in the next section:
+
+[HttpPost]
+public IActionResult Create(Pizza pizza)
+{            
+    // This code will save the pizza and return a result
+}
+
+The [HttpPost] attribute will map HTTP POST requests sent to http://localhost:5000/pizza by using the Create() method. Instead of returning a list of pizzas, as we saw with the Get() method, this method returns an IActionResult response.
+
+IActionResult lets the client know if the request succeeded and provides the ID of the newly created pizza. IActionResult does this by using standard HTTP status codes, so it can easily integrate with clients regardless of the language or platform they're running on.
+
+ASP.NET Core
+action result	    HTTP status code	Description
+CreatedAtAction	        201	            The pizza was added to the in-memory cache.The pizza is included in the response body in the media type, as defined in the accept HTTP request header (JSON by default).
+
+BadRequest is implied	400	             The request body's pizza object is invalid.
+
+Fortunately, ControllerBase has utility methods that will create the appropriate HTTP response codes and messages for you. You'll see how those work in the next exercise.
+
+PUT
+
+Modifying or updating a pizza in our inventory is similar to the POST method that you implemented, but it uses the [HttpPut] attribute and takes in the id parameter in addition to the Pizza object that needs to be updated:
+
+[HttpPut("{id}")]
+public IActionResult Update(int id, Pizza pizza)
+{
+    // This code will update the pizza and return a result
+}
+
+Each ActionResult instance used in the preceding action is mapped to the corresponding HTTP status code in the following table:
+
+ASP.NET Core
+action result	    HTTP status code	Description
+NoContent	            204	             The pizza was updated in the in-memory cache.
+BadRequest	            400	          The request body's Id value doesn't match the route's id value.
+BadRequest is implied	400	            The request body's Pizza object is invalid.
+
+DELETE
+
+One of the easier actions to implement is the DELETE action, which takes in just the id parameter of the pizza to remove from the in-memory cache:
+
+[HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    // This code will delete the pizza and return a result
+}
+
+Each ActionResult instance used in the preceding action is mapped to the corresponding HTTP status code in the following table:
+
+ASP.NET Core
+action result	    HTTP status code	Description
+NoContent	                204	        The pizza was deleted from the in-memory cache.
+NotFound	                404     	A pizza that matches the provided id parameter doesn't exist in the in-memory cache.
+
+Let's continue extending our web API controller to add the ability to create (POST), update (PUT), and delete (DELETE) pizza from our inventory.
+
+Add a pizza
+Let's enable a pizza to be added through the web API by using a POST method.
+
+Replace the // POST action comment in Controllers/PizzaController.cs with the following code:
+
+[HttpPost]
+public IActionResult Create(Pizza pizza)
+{            
+    PizzaService.Add(pizza);
+    return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza);
+}
+
+The preceding action:
+
+    x   Responds only to the HTTP POST verb, as denoted by the [HttpPost] attribute.
+    x   Inserts the request body's Pizza object into the in-memory cache.
+
+The first parameter in the CreatedAtAction method call represents an action name. The nameof keyword is used to avoid hard-coding the action name. CreatedAtAction uses the action name to generate a location HTTP response header with a URL to the newly created pizza, as explained in the previous unit.
+
+Modify a pizza
+
+Now, let's enable a pizza to be updated through the web API by using a PUT method.
+
+Replace the // PUT action comment in Controllers/PizzaController.cs with the following code:
+
+[HttpPut("{id}")]
+public IActionResult Update(int id, Pizza pizza)
+{
+    if (id != pizza.Id)
+        return BadRequest();
+           
+    var existingPizza = PizzaService.Get(id);
+    if(existingPizza is null)
+        return NotFound();
+   
+    PizzaService.Update(pizza);           
+   
+    return NoContent();
+}
+
+The preceding action:
+
+    x   Responds only to the HTTP PUT verb, as denoted by the [HttpPut] attribute.
+    x   Requires that the id parameter's value is included in the URL segment after pizza/.
+    x   Returns IActionResult, because the ActionResult return type isn't known until runtime. The   BadRequest, NotFound, and NoContent methods return BadRequestResult, NotFoundResult, and NoContentResult types, respectively
+
+Remove a pizza
+
+Finally, let's enable a pizza to be removed through the web API by using a DELETE method.
+
+Replace the // DELETE action comment in Controllers/PizzaController.cs with the following code:
+
+[HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    var pizza = PizzaService.Get(id);
+   
+    if (pizza is null)
+        return NotFound();
+       
+    PizzaService.Delete(id);
+   
+    return NoContent();
+}
+
+The preceding action:
+
+    x   Responds only to the HTTP DELETE verb, as denoted by the [HttpDelete] attribute.
+    x   Requires that the id parameter's value is included in the URL segment after pizza/.
+    x   Returns IActionResult because the ActionResult return type isn't known until runtime. The NotFound and NoContent methods return NotFoundResult and NoContentResult types, respectively.
+    x   Queries the in-memory cache for a pizza that matches the provided id parameter.
+
+Build and run the finished web API
+
+Build and start the web API by running the following command:
+
+dotnet run
+
+Reopen the existing httprepl terminal, or open a new integrated terminal from Visual Studio Code by selecting Terminal > New Terminal from the main menu.
+
+If you opened a new terminal, connect to the web API by running the following command:
+
+httprepl https://localhost:{PORT}
+
+Alternatively, run the following command at any time while HttpRepl is running:
+
+connect https://localhost:{PORT}
+
+Go to the Pizza endpoint by running the following command: 
+
+cd Pizza
+
+Run the following command to see the new actions on the Pizza API:
+
+ls
+
+The preceding command shows an output of available APIs for the Pizza endpoint:
+
+    https://localhost:{PORT}/Pizza> ls
+    .      [GET|POST]
+    ..     []
+    {id}   [GET|PUT|DELETE]
+
+
+Make a POST request to add a new pizza in HttpRepl by using the following command:
+
+post -c "{"name":"Hawaii", "isGlutenFree":false}"
+
+The preceding command returns a list of all pizza:
+
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+Date: Fri, 02 Apr 2021 23:23:09 GMT
+Location: https://localhost:{PORT}/Pizza?id=3
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{
+    "id": 3,
+    "name": "Hawaii",
+    "isGlutenFree": false
+}
+
+Update the new Hawaii pizza to a Hawaiian pizza with a PUT request by using the following command:
+
+put 3 -c  "{"id": 3, "name":"Hawaiian", "isGlutenFree":false}"
+
+The preceding command returns the following output that indicates success:
+
+HTTP/1.1 204 No Content
+Date: Fri, 02 Apr 2021 23:23:55 GMT
+Server: Kestrel
+
+To verify that the pizza was updated, rerun the GET action by using the following command:
+
+get 3
+
+The preceding command returns the newly updated pizza:
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 02 Apr 2021 23:27:37 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+{
+    "id": 3,
+    "name": "Hawaiian",
+    "isGlutenFree": false
+}
+
+Our API can also delete the newly created pizza through the DELETE action if you run the following command:
+
+delete 3
+
+The preceding command returns a 204 No Content result for success:
+
+HTTP/1.1 204 No Content
+Date: Fri, 02 Apr 2021 23:30:04 GMT
+Server: Kestrel
+
+To verify that the pizza was removed, rerun the GET action by using the following command:
+
+get 
+
+The preceding command returns the original pizzas as results:
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 02 Apr 2021 23:31:15 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+[
+    {
+        "id": 1,
+        "name": "Classic Italian",
+        "isGlutenFree": false
+    },
+    {
+        "id": 2,
+        "name": "Veggie",
+        "isGlutenFree": true
+    }
+]
+
+
+

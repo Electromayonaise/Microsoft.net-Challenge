@@ -1,0 +1,133 @@
+dotnet new webapi -f net6.0 (changed to 7.0)
+
+This command creates the files for a basic web API project that uses controllers, along with a C# project file named ContosoPizza.csproj that will return a list of weather forecasts. If you get an error, ensure that you have the .NET 6 SDK installed.
+
+The command uses an ASP.NET Core project template, aliased as webapi, to scaffold a C#-based web API project. A ContosoPizza directory is created. This directory contains an ASP.NET Core project running on .NET. The project name matches the ContosoPizza directory name.
+
+You should now have access to these files and directories:
+
+-| Controllers
+-| obj
+-| Properties
+-| appsettings.Development.json
+-| appsettings.json
+-| ContosoPizza.csproj
+-| Program.cs
+-| WeatherForecast.cs
+
+Name	                Description
+Controllers/	        Contains classes with public methods exposed as HTTP endpoints
+Program.cs	            Configures services and the app's HTTP request pipeline, and contains the
+                        app's managed entry point
+ContosoPizza.csproj	    Contains configuration metadata for the project
+
+
+dotnet run
+
+The preceding command:
+
+Locates the project file at the current directory.
+Retrieves and installs any required project dependencies for this project.
+Compiles the project code.
+Hosts the web API with the ASP.NET Core Kestrel web server at both an HTTP and HTTPS endpoint.
+A port from 5000 to 5300 will be selected for HTTP, and from 7000 to 7300 for HTTPS, when the project is created. You can easily change the ports that you use during development by editing the project's launchSettings.json file. This module uses the secure localhost URL that begins with https.
+
+A you'll get output similar to the following, which indicates your app is running:
+
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7294
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5118 
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development        
+
+If you're running this app on your own machine, you could direct a browser to the HTTPS link that's displayed in the output (in the preceding case, https://localhost:7294) to view the resulting page. Remember this port, because you'll use it throughout the module where {PORT} is used.
+
+Open a web browser and go to:
+
+https://localhost:{PORT}/weatherforecast
+
+You should see JSON output similar to the following:
+
+[
+    {
+    "date": "2021-11-09T20:36:01.4678814+00:00",
+    "temperatureC": 33,
+    "temperatureF": 91,
+    "summary": "Scorching"
+    },
+    {
+    "date": "2021-11-09T20:36:01.4682337+00:00",
+    "temperatureC": -8,
+    "temperatureF": 18,
+    "summary": "Cool"
+    },
+    // ...
+]
+
+Open a new integrated terminal from Visual Studio Code by selecting Terminal > New Terminal from the main menu, then run the following command:
+
+dotnet tool install -g Microsoft.dotnet-httprepl
+
+The preceding command installs the .NET HTTP REPL command-line tool that you'll use to make HTTP requests to the web API.
+
+Connect to the web API by running the following command:
+
+httprepl https://localhost:{PORT}
+
+Alternatively, run the following command at any time while HttpRepl is running:
+
+connect https://localhost:{PORT}
+
+Explore available endpoints by running the following command:
+
+ls
+
+The preceding command detects all APIs available on the connected endpoint. It should display the following:
+
+https://localhost:{PORT}/> ls
+.                 []
+WeatherForecast   [GET]
+
+Make a GET request in HttpRepl by using the following command:
+
+get
+
+The preceding command makes a GET request similar to going to the endpoint in the browser:
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 02 Apr 2021 17:31:43 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+[
+    {
+    "date": 4/3/2021 10:31:44 AM,
+    "temperatureC": 13,
+    "temperatureF": 55,
+    "summary": "Sweltering"
+    },
+    {
+    "date": 4/4/2021 10:31:44 AM,
+    "temperatureC": -13,
+    "temperatureF": 9,
+    "summary": "Warm"
+    },
+    // ..
+]
+
+End the current HttpRepl session by using the following command:
+
+exit
+
+Return to the dotnet terminal in the drop-down list in Visual Studio Code. Shut down the web API by selecting CTRL+C on your keyboard.
+
+Now that you've created the web API, you'll modify it to meet the needs of the pizza web API.
+
+
+
+
+
