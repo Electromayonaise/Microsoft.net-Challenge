@@ -1,0 +1,32 @@
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\appsettings.Development.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\appsettings.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\Connect four game in Blazor.staticwebassets.runtime.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\Connect four game in Blazor.exe
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\Connect four game in Blazor.deps.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\Connect four game in Blazor.runtimeconfig.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\Connect four game in Blazor.dll
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\bin\Debug\net7.0\Connect four game in Blazor.pdb
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.csproj.AssemblyReference.cache
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.AssemblyInfoInputs.cache
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.AssemblyInfo.cs
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.csproj.CoreCompileInputs.cache
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.MvcApplicationPartsAssemblyInfo.cache
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.RazorAssemblyInfo.cache
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.RazorAssemblyInfo.cs
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets\msbuild.Connect four game in Blazor.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets\msbuild.build.Connect four game in Blazor.props
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Connect four game in Blazor.props
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Connect four game in Blazor.props
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets.build.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\staticwebassets.development.json
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\scopedcss\bundle\Connect four game in Blazor.styles.css
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\scopedcss\projectbundle\Connect four game in Blazor.bundle.scp.css
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.dll
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\refint\Connect four game in Blazor.dll
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.pdb
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\Connect four game in Blazor.genruntimeconfig.cache
+C:\Code\Repositories\Microsoft.net-Challenge\Connect four game in Blazor\obj\Debug\net7.0\ref\Connect four game in Blazor.dll

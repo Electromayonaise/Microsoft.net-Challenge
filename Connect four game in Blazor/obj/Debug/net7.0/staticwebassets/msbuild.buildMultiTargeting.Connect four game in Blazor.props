@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Connect four game in Blazor.props" />
+</Project>
